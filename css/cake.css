@@ -49,8 +49,8 @@ html, body {
     -webkit-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-animation: in 500ms 6s ease-out forwards;
-    animation: in 500ms 6s ease-out forwards;
+    -webkit-animation: in 500ms ease-out forwards;
+    animation: in 500ms ease-out forwards;
 }
 /* 番茄图片样式 */
 .velas-img {
