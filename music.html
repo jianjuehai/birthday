@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday - 主页面</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; }
+    #main-iframe { width: 100vw; height: 100vh; border: none; }
+    .nav { position: fixed; top: 10px; left: 10px; z-index: 999; }
+    .nav button { margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <!-- 音乐播放器 -->
+  <audio id="bgm" src="music/天天-陶喆.mp3" loop preload="auto"></audio>
+
+  <!-- iframe 承载页面 -->
+  <iframe id="main-iframe" src="index.html"></iframe>
+  <script>
+      // 全局存储 audio 对象
+    const audio = document.getElementById('bgm');
+    // 监听来自iframe的消息
+    window.addEventListener('message', function(event) {
+      if (event.data === 'startMusic') {
+        // 尝试播放音乐
+        audio.play().catch(function(error) {
+          console.log('自动播放被阻止:', error);
+          // 可以在这里添加用户交互后播放的逻辑
+        });
+      } 
+    });
+    // 兼容自动播放
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   var audio = document.getElementById('bgm');
+    //   function tryPlay() {
+    //     audio.play().catch(function(){});
+    //   }
+    //   document.body.addEventListener('touchstart', tryPlay, { once: true });
+    //   document.body.addEventListener('click', tryPlay, { once: true });
+    // });
+    // 切换页面
+    function loadPage(page) {
+      document.getElementById('main-iframe').src = page;
+    }
+  </script>
+</body>
+</html>
