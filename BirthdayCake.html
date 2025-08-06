@@ -248,17 +248,23 @@ document.addEventListener('DOMContentLoaded', function() {
     var imgs = document.querySelectorAll('.bg-bubbles .bubble-img');
     var loaded = 0;
     var total = imgs.length;
-    if (total === 0) {
+     if (total === 0) {
         startTomato();
     } else {
         imgs.forEach(function(img) {
             if (img.complete) {
                 loaded++;
-                if (loaded === total) startTomato();
+                if (loaded === total) {
+                    // 监听最后一个蛋糕动画(crema)的结束事件
+                    document.getElementById('crema').addEventListener('endEvent', startTomato);
+                }
             } else {
                 img.onload = img.onerror = function() {
                     loaded++;
-                    if (loaded === total) startTomato();
+                    if (loaded === total) {
+                        // 监听最后一个蛋糕动画(crema)的结束事件
+                        document.getElementById('crema').addEventListener('endEvent', startTomato);
+                    }
                 };
             }
         });
@@ -267,8 +273,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function startTomato() {
         // 重新触发番茄动画
         var velas = document.querySelector('.velas');
-        velas.style.animation = 'in 0.5s 6s ease-out forwards';
-        velas.style.webkitAnimation = 'in 0.5s 6s ease-out forwards';
+        velas.style.animation = 'in 0.5s ease-out forwards';
+        velas.style.webkitAnimation = 'in 0.5s ease-out forwards';
     }
 });
 </script>
